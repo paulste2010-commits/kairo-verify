@@ -1,0 +1,41 @@
+{
+  "name": "kairo-verify",
+  "version": "1.0.0",
+  "description": "Discord Verify Bot with GDPR consent, email & IP collection",
+  "main": "dist/bot.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "prisma generate && tsc && mkdir -p dist/dashboard/views && cp -r src/dashboard/views/* dist/dashboard/views/ && mkdir -p dist/dashboard/public && cp -r src/dashboard/public/* dist/dashboard/public/",
+    "start": "node dist/bot.js",
+    "dev": "ts-node --transpile-only src/bot.ts",
+    "watch": "ts-node-dev --respawn --transpile-only src/bot.ts",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
+    "dashboard:dev": "ts-node-dev --respawn src/dashboard/server.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "prisma": "^5.22.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^4.17.21",
+    "@types/express-session": "^1.18.1",
+    "@types/node": "^22.9.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
+  }
+}

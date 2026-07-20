@@ -1,0 +1,107 @@
+<%- include('partials/header', { pageTitle: 'Features' }) %>
+
+<section class="page-hero">
+    <div class="container">
+        <div class="badge-pill badge-pink" style="margin-bottom:16px;">Alle Features</div>
+        <h1>Alles was dein Server<br><span class="gradient-heading">braucht</span></h1>
+        <p>Von der einfachen Verifizierung bis zum erweiterten Tracking — Kairo Verify bietet alles für deinen Discord Server.</p>
+    </div>
+</section>
+
+<section class="section" id="verify">
+    <div class="container">
+        <div class="section-header">
+            <div class="badge-pill badge-green" style="margin-bottom:16px;">Verify System</div>
+            <h2 class="gradient-heading">Verifizierung</h2>
+            <p class="subtitle">Schnell, sicher und benutzerfreundlich</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-wrap icon-green">🔒</div>
+                <h3>Button Verification</h3>
+                <p>Ein einziger Klick genügt. Deine Member klicken auf den Verify-Button und werden sofort verifiziert. Keine Captchas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-indigo">📧</div>
+                <h3>E-Mail Erfassung (OAuth)</h3>
+                <p>E-Mail-Adressen werden automatisch über Discord OAuth2 erfasst. Der User muss nur einmal "Autorisieren" klicken.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-pink">⚡</div>
+                <h3>Sofortige Rollen-Vergebung</h3>
+                <p>Nach erfolgreicher Verifizierung erhält der User automatisch die konfigurierte Verify-Rolle. Kein manueller Aufwand.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-cyan">📝</div>
+                <h3>Verify-Logs</h3>
+                <p>Jede Verifizierung wird in einem separaten Log-Channel dokumentiert. Behalte den Überblick über alle Aktivitäten.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="gdpr" style="background:linear-gradient(to bottom, transparent, rgba(34,197,94,0.03), transparent);">
+    <div class="container">
+        <div class="section-header">
+            <div class="badge-pill badge-green" style="margin-bottom:16px;">Datenschutz</div>
+            <h2 class="gradient-heading">DSGVO & Privatsphäre</h2>
+            <p class="subtitle">Vollständig DSGVO-konform — kein Kompromiss</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-wrap icon-green">📋</div>
+                <h3>Explizites Consent-System</h3>
+                <p>Keine Daten werden ohne ausdrückliche Einwilligung gespeichert. Der User muss aktiv zustimmen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-indigo">🗑️</div>
+                <h3>Daten-Löschung auf Wunsch</h3>
+                <p>Jeder User kann seine gespeicherten Daten jederzeit über das Dashboard einsehen und löschen lassen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-pink">🌐</div>
+                <h3>IP Erfassung (optional)</h3>
+                <p>IP-Adressen werden nur über die Website erfasst und nur wenn der User ausdrücklich zustimmt.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-cyan">🔐</div>
+                <h3>Verschlüsselte Speicherung</h3>
+                <p>Alle Daten werden verschlüsselt und sicher verwaltet. Kein unbefugter Zugriff möglich.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="tracking">
+    <div class="container">
+        <div class="section-header">
+            <div class="badge-pill badge-pink" style="margin-bottom:16px;">Tracking & Sicherheit</div>
+            <h2 class="gradient-heading">Erweiterte Features</h2>
+            <p class="subtitle">Für maximale Kontrolle über deinen Server</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-wrap icon-green">📊</div>
+                <h3>User Tracking</h3>
+                <p>Zeige auf welchen Kairo-Servern ein User verifiziert ist. Perfekt für Discord-Netzwerke.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-indigo">🛡️</div>
+                <h3>Raid-Erkennung</h3>
+                <p>Automatische Erkennung von verdächtigen Aktivitäten. Der Bot warnt dich rechtzeitig vor Raids.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-pink">📡</div>
+                <h3>Server-Anzeige</h3>
+                <p>Zeige auf welchen Servern ein User verifiziert ist. Hilft bei der Moderation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-wrap icon-cyan">🔄</div>
+                <h3>OAuth2 Integration</h3>
+                <p>Nahtlose Discord OAuth2 Integration für automatische E-Mail-Erfassung ohne manuelle Eingabe.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

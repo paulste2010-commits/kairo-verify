@@ -1,0 +1,56 @@
+    <footer class="footer">
+        <div class="bg-grid"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>
+                        <div class="nav-logo-icon" style="display:inline-flex;width:28px;height:28px;font-size:14px;">⚡</div>
+                        Kairo Verify
+                    </h3>
+                    <p>Kairo Verify ist ein Dienst, der dir hilft deinen Discord Server zu schützen und zu verwalten. Von der Verifizierung bis zum User-Tracking — alles an einem Ort.</p>
+                    <div class="footer-social">
+                        <a href="#" title="Discord">💬</a>
+                        <a href="#" title="YouTube">▶️</a>
+                        <a href="#" title="GitHub">🐙</a>
+                        <a href="#" title="Telegram">✈️</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Features</h4>
+                    <a href="/features">Alle Features</a>
+                    <a href="/features#verify">Verify System</a>
+                    <a href="/features#gdpr">DSGVO Compliance</a>
+                    <a href="/features#tracking">User Tracking</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <a href="#">Discord</a>
+                    <a href="#">Dokumentation</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Rechtliches</h4>
+                    <a href="#">Impressum</a>
+                    <a href="#">Datenschutz</a>
+                    <a href="#">AGB</a>
+                    <a href="#">Widerrufsrecht</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kairo Verify. Alle Rechte vorbehalten.</p>
+                <p>Mit ❤️ für die Discord Community</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                item.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>

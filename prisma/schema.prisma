@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model GuildConfig {
+  id                String   @id @default(cuid())
+  guildId           String   @unique
+  language          String   @default("en")
+  verifyChannelId   String?
+  verifyRoleId      String?
+  verifyLogChannelId String?
+  verifyMessage     String   @default("Click the button below to verify and get access to the server.")
+  verifyEnabled     Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  consents UserConsent[]
+}
+
+model UserConsent {
+  id            String   @id @default(cuid())
+  guildId       String
+  userId        String
+  email         String?
+  ipAddress     String?
+  consentGiven  Boolean  @default(false)
+  consentText   String?
+  verified      Boolean  @default(false)
+  verifiedAt    DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  guildConfig GuildConfig @relation(fields: [guildId], references: [guildId])
+
+  @@unique([guildId, userId])
+}
