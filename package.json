@@ -5,7 +5,7 @@
   "main": "dist/bot.js",
   "type": "commonjs",
   "scripts": {
-    "build": "prisma generate && tsc && mkdir -p dist/dashboard/views && cp -r src/dashboard/views/* dist/dashboard/views/ && mkdir -p dist/dashboard/public && cp -r src/dashboard/public/* dist/dashboard/public/",
+    "build": "npx prisma generate && npx tsc",
     "start": "npx prisma db push && node dist/bot.js",
     "dev": "ts-node --transpile-only src/bot.ts",
     "watch": "ts-node-dev --respawn --transpile-only src/bot.ts",
