@@ -123,7 +123,8 @@ app.get('/auth/callback', async (req, res) => {
 app.post('/consent/:guildId/:userId', async (req, res) => {
   const { guildId, userId } = req.params;
   const rawIp = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.socket.remoteAddress || 'unknown';
-  const ipAddress = (Array.isArray(rawIp) ? rawIp[0] : rawIp).replace('::ffff:', '') || 'unknown';
+  const firstIp = (Array.isArray(rawIp) ? rawIp[0] : String(rawIp)).split(',')[0].trim();
+  const ipAddress = firstIp.replace('::ffff:', '') || 'unknown';
 
   try {
     const consent = await prisma.userConsent.upsert({
