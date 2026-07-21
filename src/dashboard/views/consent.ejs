@@ -5,34 +5,363 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify - <%= guildName %></title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { min-height:100vh; display:flex; align-items:center; justify-content:center; background:#1a1a2e; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
-        .card { width:100%; max-width:400px; background:#16213e; border:1px solid rgba(255,255,255,0.06); border-radius:20px; padding:48px 36px; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.5); }
-        .icon { width:80px; height:80px; border-radius:50%; margin:0 auto 20px; overflow:hidden; border:3px solid rgba(255,255,255,0.08); }
-        .icon img { width:100%; height:100%; object-fit:cover; }
-        .icon-fallback { width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,#5865F2,#7289DA); color:#fff; font-size:28px; font-weight:700; }
-        h1 { font-size:20px; font-weight:700; color:#fff; margin-bottom:8px; }
-        p { font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:28px; line-height:1.5; }
-        .btn { display:block; width:100%; padding:14px; border:none; border-radius:10px; background:#5865F2; color:#fff; font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s, transform 0.1s; }
-        .btn:hover { background:#4752C4; }
-        .btn:active { transform:scale(0.98); }
-        .footer { margin-top:20px; font-size:11px; color:rgba(255,255,255,0.25); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a1a;
+            overflow: hidden;
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% -10%, rgba(88,101,242,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(88,101,242,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 40% at 10% 80%, rgba(114,137,218,0.1) 0%, transparent 50%);
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+        .orb-1 { width: 400px; height: 400px; background: #5865F2; top: -100px; left: -100px; animation-delay: 0s; }
+        .orb-2 { width: 300px; height: 300px; background: #7289DA; bottom: -80px; right: -80px; animation-delay: -7s; }
+        .orb-3 { width: 200px; height: 200px; background: #5865F2; top: 50%; left: 60%; animation-delay: -14s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            animation: rise linear infinite;
+        }
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            margin: 16px;
+            background: rgba(22,33,62,0.6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 48px 40px 40px;
+            text-align: center;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.05),
+                0 24px 80px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+            animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .icon-wrapper {
+            position: relative;
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 24px;
+        }
+
+        .icon-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #5865F2, #7289DA, #99AAF5, #5865F2);
+            animation: spin 4s linear infinite;
+            opacity: 0.6;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .icon-ring-inner {
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: #16213e;
+        }
+
+        .icon {
+            position: relative;
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .icon-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #5865F2, #7289DA);
+            color: #fff;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(88,101,242,0.12);
+            border: 1px solid rgba(88,101,242,0.2);
+            font-size: 12px;
+            font-weight: 600;
+            color: #99AAF5;
+            margin-bottom: 16px;
+            animation: fadeIn 0.8s 0.3s both;
+        }
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            animation: fadeIn 0.8s 0.4s both;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 32px;
+            line-height: 1.6;
+            animation: fadeIn 0.8s 0.5s both;
+        }
+
+        .steps {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            animation: fadeIn 0.8s 0.6s both;
+        }
+        .step {
+            flex: 1;
+            padding: 14px 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .step:hover {
+            background: rgba(88,101,242,0.08);
+            border-color: rgba(88,101,242,0.2);
+        }
+        .step-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(88,101,242,0.15);
+            color: #99AAF5;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+        }
+        .step-text {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            font-weight: 500;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #5865F2, #4752C4);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s 0.7s both;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(88,101,242,0.4);
+        }
+        .btn:hover::before { opacity: 1; }
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 4px 15px rgba(88,101,242,0.3);
+        }
+
+        .btn-icon {
+            display: inline-block;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            animation: fadeIn 0.8s 0.8s both;
+        }
+        .footer-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
+    <div class="bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="particles" id="particles"></div>
+
     <div class="card">
-        <% if (guildIcon) { %>
-            <div class="icon"><img src="<%= guildIcon %>" alt="Server Icon"></div>
-        <% } else { %>
-            <div class="icon"><div class="icon-fallback"><%= guildName.charAt(0).toUpperCase() %></div></div>
-        <% } %>
+        <div class="icon-wrapper">
+            <div class="icon-ring"></div>
+            <div class="icon-ring-inner"></div>
+            <div class="icon">
+                <% if (guildIcon) { %>
+                    <img src="<%= guildIcon %>" alt="Server Icon">
+                <% } else { %>
+                    <div class="icon-fallback"><%= guildName.charAt(0).toUpperCase() %></div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="badge">
+            <span class="badge-dot"></span>
+            Secure Verification
+        </div>
+
         <h1><%= guildName %></h1>
-        <p>Click below to verify and get access to the server.</p>
+        <p class="subtitle">Verify your account to unlock all channels<br>and become a member of the community.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <div class="step-text">Authenticate</div>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <div class="step-text">Confirm</div>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <div class="step-text">Access</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
         <form method="POST" action="/consent/<%= guildId %>/<%= userId %>">
-            <button type="submit" class="btn">Verify</button>
+            <button type="submit" class="btn">
+                <span class="btn-icon">&#10003;</span>Verify &amp; Get Access
+            </button>
         </form>
-        <div class="footer">Kairo Verify</div>
+
+        <div class="footer">
+            Powered by Kairo Verify <span class="footer-dot"></span> GDPR Compliant
+        </div>
     </div>
-    <script>window.focus();</script>
+
+    <script>
+        window.focus();
+
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (8 + Math.random() * 12) + 's';
+            p.style.animationDelay = -(Math.random() * 20) + 's';
+            p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+            container.appendChild(p);
+        }
+    </script>
 </body>
 </html>

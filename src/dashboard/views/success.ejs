@@ -3,27 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verified</title>
+    <title>Verified!</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { min-height:100vh; display:flex; align-items:center; justify-content:center; background:#1a1a2e; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
-        .card { width:100%; max-width:400px; background:#16213e; border:1px solid rgba(255,255,255,0.06); border-radius:20px; padding:48px 36px; text-align:center; box-shadow:0 24px 80px rgba(0,0,0,0.5); }
-        .check { width:64px; height:64px; border-radius:50%; background:rgba(34,197,94,0.1); border:2px solid rgba(34,197,94,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:28px; }
-        h1 { font-size:20px; font-weight:700; color:#22c55e; margin-bottom:8px; }
-        p { font-size:13px; color:rgba(255,255,255,0.45); margin-bottom:28px; line-height:1.5; }
-        .btn { display:block; width:100%; padding:14px; border:none; border-radius:10px; background:#5865F2; color:#fff; font-size:15px; font-weight:600; cursor:pointer; transition:background 0.2s; }
-        .btn:hover { background:#4752C4; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a1a;
+            overflow: hidden;
+        }
+
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34,197,94,0.2) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(34,197,94,0.08) 0%, transparent 50%);
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            animation: float 20s ease-in-out infinite;
+        }
+        .orb-1 { width: 400px; height: 400px; background: #22c55e; top: -100px; left: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: #16a34a; bottom: -80px; right: -80px; animation-delay: -7s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            margin: 16px;
+            background: rgba(22,33,62,0.6);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 48px 40px 40px;
+            text-align: center;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.05),
+                0 24px 80px rgba(0,0,0,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+            animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .check-circle {
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background: rgba(34,197,94,0.08);
+            border: 2px solid rgba(34,197,94,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            animation: checkIn 0.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes checkIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .check-svg {
+            width: 40px;
+            height: 40px;
+            stroke: #22c55e;
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            animation: draw 0.6s 0.6s ease forwards;
+        }
+
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .confetti-container {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .confetti {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            top: -10px;
+            animation: confettiFall linear forwards;
+        }
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.2);
+            font-size: 12px;
+            font-weight: 600;
+            color: #4ade80;
+            margin-bottom: 16px;
+            animation: fadeIn 0.8s 0.4s both;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #22c55e;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+            animation: fadeIn 0.8s 0.5s both;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 32px;
+            line-height: 1.6;
+            animation: fadeIn 0.8s 0.6s both;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin-bottom: 28px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #5865F2, #4752C4);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.8s 0.7s both;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(88,101,242,0.4);
+        }
+        .btn:hover::before { opacity: 1; }
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 4px 15px rgba(88,101,242,0.3);
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            animation: fadeIn 0.8s 0.8s both;
+        }
+        .footer-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
+    <div class="bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="confetti-container" id="confetti"></div>
+
     <div class="card">
-        <div class="check">✓</div>
-        <h1>Verified!</h1>
-        <p>You can close this window and return to Discord.</p>
-        <button class="btn" onclick="closeTab();">Close</button>
+        <div class="check-circle">
+            <svg class="check-svg" viewBox="0 0 40 40">
+                <polyline points="10,20 18,28 30,12" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="badge">&#10003; Verified Successfully</div>
+
+        <h1>You're All Set!</h1>
+        <p class="subtitle">Your account has been verified.<br>You now have full access to the server.</p>
+
+        <div class="divider"></div>
+
+        <button class="btn" onclick="closeTab();">
+            Return to Discord
+        </button>
+
+        <div class="footer">
+            Powered by Kairo Verify <span class="footer-dot"></span> Secure &amp; Encrypted
+        </div>
     </div>
+
     <script>
         window.focus();
+
+        const container = document.getElementById('confetti');
+        const colors = ['#5865F2', '#22c55e', '#FEE75C', '#EB459E', '#ED4245', '#99AAF5'];
+        for (let i = 0; i < 50; i++) {
+            const c = document.createElement('div');
+            c.className = 'confetti';
+            c.style.left = Math.random() * 100 + '%';
+            c.style.background = colors[Math.floor(Math.random() * colors.length)];
+            c.style.animationDuration = (2 + Math.random() * 3) + 's';
+            c.style.animationDelay = Math.random() * 1.5 + 's';
+            c.style.width = (4 + Math.random() * 8) + 'px';
+            c.style.height = (4 + Math.random() * 8) + 'px';
+            container.appendChild(c);
+        }
+
         function closeTab() {
             window.open('', '_self');
             window.close();
