@@ -148,21 +148,25 @@ const command: Command = {
       }
 
       const verifyEmbed = client.embed()
-        .setColor(config.colors.primary as any)
-        .setTitle('Verify to Get Access')
+        .setColor('#22c55e')
+        .setTitle('🌐  Verification Required')
         .setDescription(
           `Welcome to **${interaction.guild!.name}**!\n\n` +
           `To gain access to all channels, you need to verify your account.\n` +
           `Click the button below to start the verification process.`
         )
         .addFields(
-          { name: '\u200b', value: '**How it works:**', inline: false },
+          { name: '\u200b', value: '\u200b', inline: false },
+          { name: '\ud83d\udd35 How it works', value: '\u200b', inline: false },
           { name: '\u2714\ufe0f Step 1', value: 'Click the **Verify** button below', inline: true },
-          { name: '\u2714\ufe0f Step 2', value: 'Log in with your Discord account', inline: true },
-          { name: '\u2714\ufe0f Step 3', value: 'Accept & get your role instantly', inline: true },
+          { name: '\ud83d\udd11 Step 2', value: 'Log in with your Discord account', inline: true },
+          { name: '\ud83c\udf1f Step 3', value: 'Accept & get your role instantly', inline: true },
+          { name: '\u200b', value: '\u200b', inline: false },
+          { name: '\ud83d\udee1\ufe0f Security', value: 'Your data is encrypted and GDPR compliant.', inline: false },
         )
         .setThumbnail(interaction.guild!.iconURL({ size: 256 }) || null)
-        .setFooter({ text: `${interaction.guild!.name} • Verification System`, iconURL: interaction.guild!.iconURL({ size: 64 }) || undefined })
+        .setAuthor({ name: interaction.guild!.name, iconURL: interaction.guild!.iconURL({ size: 64 }) || undefined })
+        .setFooter({ text: 'Powered by Kairo Verify', iconURL: interaction.guild!.iconURL({ size: 32 }) || undefined })
         .setTimestamp();
 
       const authUrl = `${config.dashboardUrl}/auth/login?guild=${interaction.guildId}`;
@@ -175,7 +179,7 @@ const command: Command = {
       );
 
       await channel.send({
-        content: `# \u2714 Verify your account`,
+        content: `# ✅  Verify your account`,
         embeds: [verifyEmbed],
         components: [button],
       });

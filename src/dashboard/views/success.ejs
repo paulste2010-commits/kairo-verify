@@ -24,8 +24,10 @@
             inset: 0;
             z-index: 0;
             background:
-                radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34,197,94,0.2) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(34,197,94,0.08) 0%, transparent 50%);
+                radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34,197,94,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 100%, rgba(88,101,242,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 50% 40% at 10% 80%, rgba(34,197,94,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 40% 30% at 50% 50%, rgba(74,222,128,0.06) 0%, transparent 40%);
         }
 
         .orb {
@@ -36,7 +38,7 @@
             animation: float 20s ease-in-out infinite;
         }
         .orb-1 { width: 400px; height: 400px; background: #22c55e; top: -100px; left: -100px; }
-        .orb-2 { width: 300px; height: 300px; background: #16a34a; bottom: -80px; right: -80px; animation-delay: -7s; }
+        .orb-2 { width: 300px; height: 300px; background: #5865F2; bottom: -80px; right: -80px; animation-delay: -7s; }
 
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
@@ -53,12 +55,13 @@
             background: rgba(22,33,62,0.6);
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 2px solid rgba(34,197,94,0.4);
             border-radius: 24px;
             padding: 48px 40px 40px;
             text-align: center;
             box-shadow:
-                0 0 0 1px rgba(255,255,255,0.05),
+                0 0 0 1px rgba(34,197,94,0.1),
+                0 0 20px rgba(34,197,94,0.08),
                 0 24px 80px rgba(0,0,0,0.4),
                 inset 0 1px 0 rgba(255,255,255,0.06);
             animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -73,13 +76,14 @@
             width: 88px;
             height: 88px;
             border-radius: 50%;
-            background: rgba(34,197,94,0.08);
-            border: 2px solid rgba(34,197,94,0.2);
+            background: rgba(34,197,94,0.1);
+            border: 2px solid rgba(34,197,94,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 24px;
             animation: checkIn 0.5s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+            box-shadow: 0 0 30px rgba(34,197,94,0.15);
         }
 
         @keyframes checkIn {
@@ -128,8 +132,8 @@
             gap: 6px;
             padding: 6px 14px;
             border-radius: 20px;
-            background: rgba(34,197,94,0.1);
-            border: 1px solid rgba(34,197,94,0.2);
+            background: rgba(34,197,94,0.12);
+            border: 1px solid rgba(34,197,94,0.25);
             font-size: 12px;
             font-weight: 600;
             color: #4ade80;
@@ -140,7 +144,7 @@
         h1 {
             font-size: 24px;
             font-weight: 800;
-            color: #22c55e;
+            color: #4ade80;
             margin-bottom: 8px;
             letter-spacing: -0.02em;
             animation: fadeIn 0.8s 0.5s both;
@@ -156,7 +160,7 @@
 
         .divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            background: linear-gradient(90deg, transparent, rgba(34,197,94,0.2), transparent);
             margin-bottom: 28px;
         }
 
@@ -166,7 +170,7 @@
             padding: 16px;
             border: none;
             border-radius: 14px;
-            background: linear-gradient(135deg, #5865F2, #4752C4);
+            background: linear-gradient(135deg, #22c55e, #16a34a);
             color: #fff;
             font-size: 16px;
             font-weight: 700;
@@ -187,12 +191,12 @@
         }
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(88,101,242,0.4);
+            box-shadow: 0 8px 30px rgba(34,197,94,0.4);
         }
         .btn:hover::before { opacity: 1; }
         .btn:active {
             transform: translateY(0) scale(0.98);
-            box-shadow: 0 4px 15px rgba(88,101,242,0.3);
+            box-shadow: 0 4px 15px rgba(34,197,94,0.3);
         }
 
         .footer {
@@ -252,7 +256,7 @@
         window.focus();
 
         const container = document.getElementById('confetti');
-        const colors = ['#5865F2', '#22c55e', '#FEE75C', '#EB459E', '#ED4245', '#99AAF5'];
+        const colors = ['#22c55e', '#5865F2', '#FEE75C', '#EB459E', '#4ade80', '#99AAF5'];
         for (let i = 0; i < 50; i++) {
             const c = document.createElement('div');
             c.className = 'confetti';
