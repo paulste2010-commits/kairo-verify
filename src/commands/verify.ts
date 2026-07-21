@@ -147,10 +147,22 @@ const command: Command = {
         return;
       }
 
-      const verifyEmbed = client.embed('Verification Required')
+      const verifyEmbed = client.embed()
         .setColor(config.colors.primary as any)
-        .setDescription(guildConfig.verifyMessage || 'Click the button below to verify and get access to the server.')
-        .setFooter({ text: 'Kairo Verify' })
+        .setTitle('Verify to Get Access')
+        .setDescription(
+          `Welcome to **${interaction.guild!.name}**!\n\n` +
+          `To gain access to all channels, you need to verify your account.\n` +
+          `Click the button below to start the verification process.`
+        )
+        .addFields(
+          { name: '\u200b', value: '**How it works:**', inline: false },
+          { name: '\u2714\ufe0f Step 1', value: 'Click the **Verify** button below', inline: true },
+          { name: '\u2714\ufe0f Step 2', value: 'Log in with your Discord account', inline: true },
+          { name: '\u2714\ufe0f Step 3', value: 'Accept & get your role instantly', inline: true },
+        )
+        .setThumbnail(interaction.guild!.iconURL({ size: 256 }) || null)
+        .setFooter({ text: `${interaction.guild!.name} • Verification System`, iconURL: interaction.guild!.iconURL({ size: 64 }) || undefined })
         .setTimestamp();
 
       const authUrl = `${config.dashboardUrl}/auth/login?guild=${interaction.guildId}`;
@@ -158,10 +170,15 @@ const command: Command = {
         new ButtonBuilder()
           .setStyle(ButtonStyle.Link)
           .setURL(authUrl)
-          .setLabel('Verify')
+          .setLabel('Verify Now')
+          .setEmoji('\u2714\ufe0f')
       );
 
-      await channel.send({ embeds: [verifyEmbed], components: [button] });
+      await channel.send({
+        content: `# \u2714 Verify your account`,
+        embeds: [verifyEmbed],
+        components: [button],
+      });
 
       await interaction.editReply({
         embeds: [client.successEmbed(`Verification embed sent to ${channel}`)],

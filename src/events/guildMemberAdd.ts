@@ -1,4 +1,4 @@
-import { Events, EmbedBuilder } from 'discord.js';
+import { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import BotClient from '../client';
 import { Event } from '../types';
 import config from '../config';
@@ -32,15 +32,36 @@ const event: Event = {
         return;
       }
 
-      const welcomeEmbed = client.embed('Willkommen!')
+      const welcomeEmbed = client.embed()
         .setColor(config.colors.primary as any)
-        .setDescription(`Hallo ${member}, willkommen auf **${member.guild.name}**!\n\nUm Zugriff auf den Server zu erhalten, musst du dich verifizieren. Klicke auf den Button unten um fortzufahren.`)
+        .setTitle(`Welcome to ${member.guild.name}!`)
+        .setDescription(
+          `Hey ${member}, glad to have you here!\n\n` +
+          `To access all channels, please verify your account by clicking the button below.`
+        )
+        .addFields(
+          { name: '\u200b', value: '**How it works:**', inline: false },
+          { name: '\u2714\ufe0f Step 1', value: 'Click the **Verify** button', inline: true },
+          { name: '\u2714\ufe0f Step 2', value: 'Log in with Discord', inline: true },
+          { name: '\u2714\ufe0f Step 3', value: 'Get your role instantly', inline: true },
+        )
         .setThumbnail(member.user.displayAvatarURL({ size: 256 }))
+        .setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL({ size: 64 }) })
+        .setFooter({ text: `${member.guild.name} • Verification System`, iconURL: member.guild.iconURL({ size: 64 }) || undefined })
         .setTimestamp();
+
+      const button = new ActionRowBuilder<ButtonBuilder>().addComponents(
+        new ButtonBuilder()
+          .setStyle(ButtonStyle.Link)
+          .setURL(`${config.dashboardUrl}/auth/login?guild=${member.guild.id}`)
+          .setLabel('Verify Now')
+          .setEmoji('\u2714\ufe0f')
+      );
 
       await channel.send({
         content: `${member}`,
         embeds: [welcomeEmbed],
+        components: [button],
       });
     } catch (error) {
       console.error('[Event] Error in guildMemberAdd:', error);
